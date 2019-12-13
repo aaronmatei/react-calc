@@ -13,7 +13,7 @@ class App extends Component {
 		this.setState({ current: "0" });
 	};
 	addToCurrent = symbol => {
-		if (["/", "-", "+", "*"].indexOf(symbol) > -1) {
+		if (["/", "-", "+", "X"].indexOf(symbol) > -1) {
 			let { previous } = this.state;
 			previous.push(this.state.current + symbol);
 			this.setState({ previous, nextIsReset: true });

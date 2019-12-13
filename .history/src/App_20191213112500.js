@@ -5,32 +5,17 @@ import "./css/styles.css";
 
 class App extends Component {
 	state = {
-		current: "",
+		current: "0",
 		previous: [],
 	};
 
 	reset = () => {
-		this.setState({ current: "0" });
+		this.setState({ result: "0" });
 	};
 	addToCurrent = symbol => {
-		if (["/", "-", "+", "*"].indexOf(symbol) > -1) {
-			let { previous } = this.state;
-			previous.push(this.state.current + symbol);
-			this.setState({ previous, nextIsReset: true });
+		if (["/", "-", "+", "X"].indexOf(symbol)) {
 		} else {
-			if ((this.state.current === "0" && symbol !== ".") || this.state.nextIsReset) {
-				this.setState({ current: symbol, nextIsReset: false });
-			} else {
-				this.setState({ current: this.state.current + symbol });
-			}
-		}
-	};
-
-	calculateResult = symbol => {
-		let { current, previous, nextIsReset } = this.state;
-		if (previous.length > 0) {
-			current = eval(String(previous[previous.length - 1] + current));
-			this.setState({ current, previous: [], nextIsReset: false });
+			this.setState({ current: this.state.current + symbol });
 		}
 	};
 
@@ -41,7 +26,7 @@ class App extends Component {
 			{ symbol: "7", cols: 1, action: this.addToCurrent },
 			{ symbol: "8", cols: 1, action: this.addToCurrent },
 			{ symbol: "9", cols: 1, action: this.addToCurrent },
-			{ symbol: "*", cols: 1, action: this.addToCurrent },
+			{ symbol: "X", cols: 1, action: this.addToCurrent },
 			{ symbol: "4", cols: 1, action: this.addToCurrent },
 			{ symbol: "5", cols: 1, action: this.addToCurrent },
 			{ symbol: "6", cols: 1, action: this.addToCurrent },
@@ -53,7 +38,7 @@ class App extends Component {
 			{ symbol: "+-", cols: 1, action: this.addToCurrent },
 			{ symbol: "0", cols: 1, action: this.addToCurrent },
 			{ symbol: ".", cols: 1, action: this.addToCurrent },
-			{ symbol: "=", cols: 1, action: this.calculateResult },
+			{ symbol: "=", cols: 1, action: this.addToCurrent },
 		];
 		return (
 			<div className='App'>
